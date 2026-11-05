@@ -1,0 +1,22 @@
+using Microsoft.AspNetCore.Mvc;
+using Team_8_4630.Domain.Catalog;
+
+namespace Team_8_4630.Api.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class CatalogController : ControllerBase
+    {
+        [HttpGet]
+        public IActionResult GetItems()
+        {
+            var items = new List<Item>()
+            {
+                new Item("Shirt", "Ohio State shirt.", "Nike", 29.99m),
+                new Item("Shorts", "Ohio State shorts.", "Nike", 44.99m)
+            };
+
+            return Ok(items);
+        }
+    }
+}
