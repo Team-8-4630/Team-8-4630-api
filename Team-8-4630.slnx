@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="Team-8-4630.Api/Team-8-4630.Api.csproj" />
+  <Project Path="Team-8-4630.Data/Team-8-4630.Data.csproj" />
   <Project Path="Team-8-4630.Domain/Team-8-4630.Domain.csproj" />
 </Solution>
