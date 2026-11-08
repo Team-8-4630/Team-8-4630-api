@@ -1,6 +1,40 @@
-@Team_8_4630.Api_HostAddress = http://localhost:5166
-
-GET {{Team_8_4630.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+###
+GET https://localhost:7181/catalog
 
 ###
+GET https://localhost:7181/catalog/1234
+
+###
+POST https://localhost:7181/catalog
+Content-Type: application/json
+
+{
+    "name": "Shoes",
+    "description": "Ohio State shoes",
+    "brand": "Nike",
+    "price": 129.99
+}
+
+###
+POST https://localhost:7181/catalog/1/ratings
+Content-Type: application/json
+
+{
+    "stars": 5,
+    "userName": "test",
+    "review": "Great"
+}
+
+###
+PUT https://localhost:7181/catalog/1
+Content-Type: application/json
+
+{
+    "name": "Shoes",
+    "description": "Ohio State shoes",
+    "brand": "Nike",
+    "price": 129.99
+}
+
+###
+DELETE https://localhost:7181/catalog/1
