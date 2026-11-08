@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Team-8-4630.Domain\Team-8-4630.Domain.csproj" />
+    <ProjectReference Include="..\Team-8-4630.Data\Team-8-4630.Data.csproj" />
   </ItemGroup>
 
 </Project>
