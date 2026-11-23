@@ -24,6 +24,16 @@ namespace jet.piranha.Api
         "Data Source=Registrar.sqlite",
         sqlite => sqlite.MigrationsAssembly("Team-8-4630.Api")));
 
+    services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(builder =>
+        {
+            builder.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+    });
+
     services.AddControllers();
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
@@ -41,6 +51,8 @@ namespace jet.piranha.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
