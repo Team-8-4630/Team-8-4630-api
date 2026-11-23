@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Team_8_4630.Data;
+using Team_8_4630.Api.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace jet.piranha.Api
 {
@@ -34,7 +36,31 @@ namespace jet.piranha.Api
         });
     });
 
+    string authority = Configuration["Auth0:Authority"] ??
+        throw new ArgumentNullException("Auth0:Authority");
+
+    string audience = Configuration["Auth0:Audience"] ??
+        throw new ArgumentNullException("Auth0:Audience");
+
     services.AddControllers();
+
+    services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.Authority = authority;
+            options.Audience = audience;
+        });
+
+    services.AddAuthorization(options =>
+    {
+        options.AddPolicy("delete:catalog", policy =>
+            policy.RequireAuthenticatedUser().RequireClaim("scope", "delete:catalog"));
+    });
+
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
 }
@@ -53,6 +79,8 @@ namespace jet.piranha.Api
             app.UseRouting();
 
             app.UseCors();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

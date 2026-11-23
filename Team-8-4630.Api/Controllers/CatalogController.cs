@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Team_8_4630.Domain.Catalog;
@@ -93,6 +94,7 @@ namespace Team_8_4630.Api.Controllers
         }
 
         [HttpDelete("{id:int}")]
+         [Authorize("delete:catalog")]
         public IActionResult Delete(int id)
         {
             var item = _context.Items
